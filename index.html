@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>KARELIA • Уединённый отдых на Ладоге</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F4F1EA;
+      --detail-bg: #F8F9F7;
+      --surface: #FFFFFF;
+      --text: #182320;
+      --text-muted: #5F6B66;
+      --text-light: #949E99;
+      --brand: #22382F;
+      --brand-accent: #2E5244;
+      --accent-tint: rgba(34, 56, 47, 0.05);
+      --border-subtle: rgba(24, 35, 32, 0.06);
+      --gold: #A38865;
+      --star-ya: #FFB800;
+      --tg-color: #24A1DE;
+      --wa-color: #25D366;
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-full: 9999px;
+      --ease: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.4s var(--ease);
+    }
+    body.in-detail {
+      background-color: var(--detail-bg);
+    }
+    .app-viewport {
+      width: 100%;
+      max-width: 440px;
+      padding: 28px 18px 115px;
+      position: relative;
+    }
+
+    @keyframes editorialFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .anim-in {
+      animation: editorialFadeUp 0.85s var(--ease) forwards;
+    }
+    .delay-1 { animation-delay: 0.08s; opacity: 0; }
+    .delay-2 { animation-delay: 0.16s; opacity: 0; }
+    .delay-3 { animation-delay: 0.24s; opacity: 0; }
+
+    /* ГЛАВНЫЙ ЭКРАН */
+    .screen-main.hidden {
+      display: none;
+    }
+    .editorial-header {
+      margin-bottom: 34px;
+      padding: 0 4px;
+    }
+    .brand-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .brand-eyebrow::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: rgba(163, 136, 101, 0.35);
+    }
+    
+    @keyframes softSubtleGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 45px;
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .hero-heading em {
+      font-style: italic;
+      font-weight: 400;
+      background: linear-gradient(120deg, #22382F 0%, #15241E 45%, #2B463B 75%, #22382F 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: softSubtleGradient 7s ease-in-out infinite;
+      display: inline-block;
+    }
+    .hero-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      max-width: 350px;
+    }
+
+    .houses-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      margin-bottom: 36px;
+    }
+    .editorial-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      background: var(--brand);
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 16px 36px -12px rgba(25, 32, 29, 0.18);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .editorial-card:active {
+      transform: scale(0.985);
+      box-shadow: 0 8px 20px -6px rgba(25, 32, 29, 0.2);
+    }
+    .editorial-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s var(--ease);
+    }
+
+    /* Дом 1: main.jpg, зум 20%, прилипание вправо */
+    .card-zoom-h1 img {
+      object-position: right center !important;
+      transform: scale(1.2);
+      transform-origin: right center;
+      filter: saturate(1.28) contrast(1.04);
+    }
+    .card-zoom-h1:hover img {
+      transform: scale(1.24);
+    }
+
+    /* Дом 2: естественный размер без зума, прижим вправо */
+    .card-zoom-h2 img {
+      object-position: right center !important;
+      transform: scale(1.0);
+      transform-origin: right center;
+      filter: saturate(1.18) contrast(1.03);
+    }
+    .card-zoom-h2:hover img {
+      transform: scale(1.04);
+    }
+
+    .card-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(25, 32, 29, 0.2) 0%,
+        rgba(25, 32, 29, 0.0) 35%,
+        rgba(25, 32, 29, 0.68) 70%,
+        rgba(25, 32, 29, 0.95) 100%
+      );
+      pointer-events: none;
+    }
+    
+    .card-badges-wrap {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      pointer-events: none;
+    }
+    .card-badge-pill {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--brand);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-content-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 22px;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card-meta-line {
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+    }
+    .card-name-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      color: #FFFFFF;
+    }
+    .card-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .card-cost {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+    .card-cost small {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .card-open-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+    }
+    .card-open-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--brand);
+      stroke-width: 2.2;
+      fill: none;
+    }
+
+    /* БЛОК ОТЗЫВОВ */
+    .reviews-section {
+      margin-top: 10px;
+    }
+    .reviews-header-aesthetic {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 30px 22px 28px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.03);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .score-aesthetic-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+    .score-aesthetic-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--brand);
+      letter-spacing: -1px;
+    }
+    .score-aesthetic-max {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    .score-info-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+    .stars-aesthetic-row {
+      display: flex;
+      gap: 3px;
+    }
+    .star-icon {
+      width: 15px;
+      height: 15px;
+      fill: var(--star-ya);
+    }
+    .score-meta-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.2px;
+    }
+    .score-sub-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.25;
+    }
+
+    /* КОМПАКТНЫЙ ВЕРТИКАЛЬНЫЙ СПИСОК ОТЗЫВОВ */
+    .reviews-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .review-item-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 19px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .review-header-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .review-user-group {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    .review-avatar {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+      user-select: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .review-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .avatar-brown { background: #826E58; }
+    .avatar-purple { background: #5E5368; }
+
+    .review-name-date {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .review-author {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--brand);
+      line-height: 1.2;
+    }
+    .review-date {
+      font-size: 11.5px;
+      color: var(--text-light);
+    }
+    .review-stars {
+      display: flex;
+      gap: 2.5px;
+    }
+    .review-body-text {
+      font-size: 13.3px;
+      line-height: 1.55;
+      color: #384540;
+    }
+
+    /* ДЕТАЛЬНЫЙ ЭКРАН */
+    .screen-detail {
+      display: none;
+    }
+    .screen-detail.active {
+      display: block;
+    }
+    .screen-detail.active .detail-anim-node {
+      animation: editorialFadeUp 0.65s var(--ease) forwards;
+      opacity: 0;
+    }
+    .d-delay-1 { animation-delay: 0.04s !important; }
+    .d-delay-2 { animation-delay: 0.10s !important; }
+    .d-delay-3 { animation-delay: 0.16s !important; }
+    .d-delay-4 { animation-delay: 0.22s !important; }
+    .d-delay-5 { animation-delay: 0.28s !important; }
+    .d-delay-6 { animation-delay: 0.34s !important; }
+    .d-delay-7 { animation-delay: 0.40s !important; }
+
+    .detail-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .btn-circle-back {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: transform 0.15s ease;
+    }
+    .btn-circle-back:active {
+      transform: scale(0.92);
+    }
+    .btn-circle-back svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--brand);
+      stroke-width: 2.2;
+      fill: none;
+    }
+    .detail-location-pill {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* СЛАЙДЕР */
+    .showcase-module {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .carousel-stage {
+      position: relative;
+      width: 100%;
+      height: 310px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: #182320;
+      box-shadow: 0 16px 36px -12px rgba(24, 35, 32, 0.2);
+      touch-action: pan-y pinch-zoom;
+    }
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s var(--ease);
+    }
+    .carousel-slide-item {
+      min-width: 100%;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .carousel-slide-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      cursor: pointer;
+      filter: saturate(1.18) contrast(1.03);
+    }
+    .slider-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 6;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .slider-arrow-btn:active {
+      transform: translateY(-50%) scale(0.9);
+      background: rgba(255, 255, 255, 1);
+    }
+    .slider-arrow-btn.prev { left: 12px; }
+    .slider-arrow-btn.next { right: 12px; }
+    .slider-arrow-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--brand);
+      stroke-width: 2.4;
+      fill: none;
+    }
+
+    .btn-open-story {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--brand);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      z-index: 5;
+    }
+    .btn-open-story svg.book-ico {
+      width: 14px;
+      height: 14px;
+      stroke: var(--brand);
+      stroke-width: 2.2;
+      fill: none;
+    }
+    .btn-open-story svg.chevron-ico {
+      width: 12px;
+      height: 12px;
+      stroke: var(--brand);
+      stroke-width: 2.4;
+      fill: none;
+      transition: transform 0.2s ease;
+    }
+    
+    .btn-zoom-corner {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(24, 35, 32, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .btn-zoom-corner svg {
+      width: 16px;
+      height: 16px;
+      stroke: #FFFFFF;
+      stroke-width: 2;
+      fill: none;
+    }
+    .thumb-strip {
+      display: flex;
+      justify-content: flex-start;
+      gap: 7px;
+      padding: 4px 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .thumb-strip::-webkit-scrollbar {
+      display: none;
+    }
+    .thumb-node {
+      width: 48px;
+      height: 34px;
+      min-width: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      opacity: 0.45;
+      transition: all 0.25s var(--ease);
+      border: 2px solid transparent;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      flex-shrink: 0;
+    }
+    .thumb-node img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.18);
+    }
+    .thumb-node.active {
+      opacity: 1;
+      border-color: var(--brand);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(34, 56, 47, 0.2);
+    }
+
+    /* ШАПКА КАРТОЧКИ: ИДЕНТИЧНЫЙ ОТСТУП 17px */
+    .detail-hero-box {
+      margin-bottom: 0px;
+      padding: 4px 2px 0;
+    }
+    .detail-title-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--brand);
+      letter-spacing: -0.3px;
+      margin-bottom: 17px !important;
+    }
+    .detail-season-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .season-price-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .season-price-val {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.4px;
+    }
+    .season-price-val small {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* РАЗДЕЛИТЕЛЬНАЯ ЛИНИЯ */
+    .detail-divider-line {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(24, 35, 32, 0.02) 0%, rgba(24, 35, 32, 0.12) 30%, rgba(24, 35, 32, 0.12) 70%, rgba(24, 35, 32, 0.02) 100%);
+      margin: 16px 2px 18px;
+    }
+
+    /* ТЕГИ */
+    .tags-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+    .feature-tag {
+      background: var(--surface);
+      border: 1px solid rgba(24, 35, 32, 0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      padding: 7px 13px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .feature-tag svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--brand-accent);
+      stroke-width: 2.1;
+      fill: none;
+    }
+
+    /* СЕТКА СВОДКИ */
+    .quick-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .quick-spec-cell {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 12px 6px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 5px;
+    }
+    .spec-icon-wrap {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent-tint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+    }
+    .spec-icon-wrap svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--brand);
+      stroke-width: 2;
+      fill: none;
+    }
+    .spec-cell-val {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand);
+      line-height: 1.2;
+    }
+    .spec-cell-sub {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    /* ХАРАКТЕРИСТИКИ */
+    .editorial-section {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 22px 20px;
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.03);
+      margin-bottom: 16px;
+    }
+    .section-title-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 16px;
+    }
+    .section-title-line::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: rgba(24, 35, 32, 0.08);
+    }
+
+    .specs-flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .spec-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 12.5px;
+    }
+    .spec-item-label {
+      color: var(--text-muted);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .spec-item-dotline {
+      flex: 1;
+      border-bottom: 1px dotted rgba(24, 35, 32, 0.15);
+      transform: translateY(-3px);
+    }
+    .spec-item-val {
+      color: var(--brand);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* ПРАВИЛА ПРОЖИВАНИЯ */
+    .rules-bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .rule-item-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12.5px;
+    }
+    .rule-bullet {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 50%;
+      background: var(--accent-tint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+    }
+    .rule-bullet svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--brand);
+      stroke-width: 2.2;
+      fill: none;
+    }
+    .rule-text {
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .rule-text strong {
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    /* КАРТА */
+    .map-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+    .map-addr-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+      line-height: 1.4;
+      flex: 1;
+    }
+    .map-icon-btn {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      background: var(--accent-tint);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .map-icon-btn:active {
+      transform: scale(0.92);
+      background: rgba(34, 56, 47, 0.12);
+    }
+    .map-icon-btn svg {
+      width: 17px;
+      height: 17px;
+      stroke: var(--brand);
+      stroke-width: 2.2;
+      fill: none;
+      transition: transform 0.3s ease;
+    }
+    .map-frame-wrap {
+      width: 100%;
+      height: 130px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      transition: height 0.4s var(--ease);
+    }
+    .map-frame-wrap.open {
+      height: 290px;
+    }
+    .map-frame-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* БЛОК "КАК ДОБРАТЬСЯ" */
+    .directions-steps-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .direction-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .step-ico-box {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      border-radius: 9px;
+      background: #F4F6F4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .step-ico-box svg {
+      width: 15px;
+      height: 15px;
+      stroke: #5F6B66;
+      stroke-width: 2;
+      fill: none;
+    }
+    .step-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand);
+      line-height: 1.3;
+    }
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ПЛАВАЮЩИЙ БЛОК СВЯЗИ */
+    .floating-dock-wrap {
+      position: fixed;
+      bottom: 18px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      padding: 0 16px;
+      pointer-events: none;
+    }
+    .floating-dock {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-full);
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 16px 36px -6px rgba(25, 32, 29, 0.18);
+      border: 1px solid rgba(24, 35, 32, 0.08);
+    }
+    .dock-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.15s ease;
+      flex: 1 1 0;
+    }
+    .dock-btn:active {
+      transform: scale(0.96);
+    }
+    .dock-wa {
+      background: var(--wa-color);
+      color: #FFFFFF;
+    }
+    .dock-wa svg {
+      width: 16px;
+      height: 16px;
+      fill: #FFFFFF;
+    }
+    .dock-tg {
+      background: var(--tg-color);
+      color: #FFFFFF;
+    }
+    .dock-tg svg {
+      width: 15px;
+      height: 15px;
+      fill: #FFFFFF;
+    }
+    
+    /* Кнопка "Позвонить" - спокойная, без сияния и пульсаций */
+    .dock-tel {
+      background: #F4F6F4;
+      color: var(--brand);
+      border: 1px solid rgba(34, 56, 47, 0.14);
+      position: relative;
+    }
+
+    /* ШТОРКА ОПИСАНИЯ */
+    .story-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 23, 21, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .story-modal-backdrop.open {
+      display: flex;
+    }
+    .story-sheet {
+      width: 100%;
+      max-width: 440px;
+      background: var(--surface);
+      border-radius: 28px 28px 0 0;
+      padding: 24px 22px 36px;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+      animation: sheetUp 0.35s var(--ease) forwards;
+      position: relative;
+      max-height: 82vh;
+      display: flex;
+      flex-direction: column;
+    }
+    @keyframes sheetUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .sheet-drag-handle {
+      width: 38px;
+      height: 4px;
+      background: rgba(24, 35, 32, 0.15);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+    .sheet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+    .sheet-text-scroll {
+      overflow-y: auto;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      white-space: pre-line;
+      margin-bottom: 18px;
+      padding-right: 4px;
+    }
+    .sheet-close-btn {
+      width: 100%;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--brand);
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* LIGHTBOX */
+    .photo-modal-preview {
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 18, 16, 0.98);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y pinch-zoom;
+    }
+    .photo-modal-preview.active {
+      display: flex;
+    }
+    .modal-close-ico {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .lightbox-carousel {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .modal-target-img {
+      max-width: 92vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 12px;
+      user-select: none;
+      filter: saturate(1.18) contrast(1.03);
+    }
+    .lightbox-counter-badge {
+      position: absolute;
+      bottom: 28px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-viewport">
+    
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <main id="mainScreen" class="screen-main">
+      <header class="editorial-header anim-in">
+        <div class="brand-eyebrow">Карелия • Ладога</div>
+        <h1 class="hero-heading">Тишина среди<br><em>хвойного леса</em></h1>
+        <p class="hero-sub">Архитектурные дома на побережье Ладоги для уединения, семейных вечеров и чистой северной природы.</p>
+      </header>
+
+      <section class="houses-stream">
+        <!-- Карточка 1: Еловый Берег -->
+        <article class="editorial-card card-zoom-h1 anim-in delay-1" onclick="navigateToHouse('house1')">
+          <img src="house1/main.jpg" alt="Домик «Еловый Берег»">
+          <div class="card-scrim"></div>
+          
+          <div class="card-badges-wrap">
+            <span class="card-badge-pill">Сауна внутри дома</span>
+            <span class="card-badge-pill">Панорамный вид</span>
+            <span class="card-badge-pill">Плавучий пирс</span>
+          </div>
+
+          <div class="card-content-bottom">
+            <span class="card-meta-line">3-к. дом • 60 м² • До 5 гостей</span>
+            <h2 class="card-name-title">«Еловый Берег»</h2>
+            <div class="card-bottom-row">
+              <div class="card-cost" id="mainCardPrice1">от 14 000 ₽ <small>/ сутки</small></div>
+              <div class="card-open-btn">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 2: Берёзовый Хутор -->
+        <article class="editorial-card card-zoom-h2 anim-in delay-2" onclick="navigateToHouse('house2')">
+          <img src="house2/main.jpg" alt="Домик «Берёзовый Хутор»">
+          <div class="card-scrim"></div>
+          
+          <div class="card-badges-wrap">
+            <span class="card-badge-pill">Отдельная баня рустик</span>
+            <span class="card-badge-pill">Панорамная терраса</span>
+            <span class="card-badge-pill">Самовар на дровах</span>
+          </div>
+
+          <div class="card-content-bottom">
+            <span class="card-meta-line">2-к. дом • 40 м² • До 4 гостей</span>
+            <h2 class="card-name-title">«Берёзовый Хутор»</h2>
+            <div class="card-bottom-row">
+              <div class="card-cost" id="mainCardPrice2">от 14 000 ₽ <small>/ сутки</small></div>
+              <div class="card-open-btn">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- БЛОК ОТЗЫВОВ -->
+      <section class="reviews-section anim-in delay-3">
+        <!-- Шапка рейтинга: выше по высоте, цифра 48px, золотисто-желтые звёзды яндекса -->
+        <div class="reviews-header-aesthetic">
+          <div class="score-aesthetic-wrap">
+            <span class="score-aesthetic-num">5.0</span>
+            <span class="score-aesthetic-max">/5</span>
+          </div>
+          <div class="score-info-wrap">
+            <div class="stars-aesthetic-row">
+              <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+            <div class="score-meta-text">Рейтинг 5.0 • 29 отзывов</div>
+            <div class="score-sub-label">100% гостей рекомендуют отдых в шхерах</div>
+          </div>
+        </div>
+
+        <!-- Компактный вертикальный стек отзывов -->
+        <div class="reviews-stack">
+          
+          <!-- Отзыв 1: Денис -->
+          <article class="review-item-card">
+            <div class="review-header-line">
+              <div class="review-user-group">
+                <div class="review-avatar">
+                  <img src="https://90.img.avito.st/image/1/1.VuA7sba17AlNEzgKG9Bt5HMQ-AmFGjgKTRP4Cw.hEHYmBt86dBqLnJaPggXF8YTdfbaTuRixQHRXN11QMw" alt="Денис">
+                </div>
+                <div class="review-name-date">
+                  <span class="review-author">Денис</span>
+                  <span class="review-date">8 июля</span>
+                </div>
+              </div>
+              <div class="review-stars">
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <p class="review-body-text">Все понравилось, домик и баня очень уютные, природа кайф, рыбы много. Приедем обязательно еще!</p>
+          </article>
+
+          <!-- Отзыв 2: Михаил -->
+          <article class="review-item-card">
+            <div class="review-header-line">
+              <div class="review-user-group">
+                <div class="review-avatar avatar-brown">М</div>
+                <div class="review-name-date">
+                  <span class="review-author">Михаил</span>
+                  <span class="review-date">29 июня</span>
+                </div>
+              </div>
+              <div class="review-stars">
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <p class="review-body-text">Отдыхали с 22 июня по 27 июня. Отличное место, прекрасные условия, прям действительно прекрасные. Все комфортно, все есть для классного отдыха. Очень отзывчивый хозяин, встретил, сопроводил, показал места для ловли рыбы. Огромное спасибо, отдыхом довольны на 5+.</p>
+          </article>
+
+          <!-- Отзыв 3: Юрий Терлецкий -->
+          <article class="review-item-card">
+            <div class="review-header-line">
+              <div class="review-user-group">
+                <div class="review-avatar">
+                  <img src="https://90.img.avito.st/image/1/1.z1-Ktra2dbb8FKG1mMnYWnsVY7w01WB0PRVh.nyls7O_8PsK2cyzzhQMkG1tSQZ1lziqcNhbs6TlBbHQ" alt="Юрий Терлецкий">
+                </div>
+                <div class="review-name-date">
+                  <span class="review-author">Юрий Терлецкий</span>
+                  <span class="review-date">9 октября 2025</span>
+                </div>
+              </div>
+              <div class="review-stars">
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <p class="review-body-text">Отдыхали в октябре. Все очень понравилось: комфортные условия, интересный дом, хорошая баня. Все чисто, всего достаточно, удобные кровати. Волшебная природа вокруг, все организовано четко. Нужно было выехать очень рано — хозяин вошел в положение и все организовал. Дети просятся обратно!</p>
+          </article>
+
+          <!-- Отзыв 4: Елена -->
+          <article class="review-item-card">
+            <div class="review-header-line">
+              <div class="review-user-group">
+                <div class="review-avatar">
+                  <img src="https://40.img.avito.st/image/1/1.xFVtP7a2frwbnaq_aTDeA7ucaLbTXGt-2pxq.vknma1YU_SvXkNdi0eySfi57g-Dsdf1qMl8wUe6iWCI" alt="Елена">
+                </div>
+                <div class="review-name-date">
+                  <span class="review-author">Елена</span>
+                  <span class="review-date">14 августа</span>
+                </div>
+              </div>
+              <div class="review-stars">
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <p class="review-body-text">Чудесный домик на острове, тишина, спокойствие и умиротворение. Потрясающий вид из окна, хорошая баня, в домике есть всё необходимое. Прекрасно провели время семьёй (2 взрослых, 2 детей). Дети поймали щуку — впечатлений на всю жизнь. Однозначно рекомендую!</p>
+          </article>
+
+          <!-- Отзыв 5: Иван Иваныч -->
+          <article class="review-item-card">
+            <div class="review-header-line">
+              <div class="review-user-group">
+                <div class="review-avatar avatar-purple">И</div>
+                <div class="review-name-date">
+                  <span class="review-author">Иван Иваныч</span>
+                  <span class="review-date">28 июня</span>
+                </div>
+              </div>
+              <div class="review-stars">
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <p class="review-body-text">В реальности всё намного лучше, чем на фото. Есть всё для отдыха: интернет, посуда, газовая плита, беседка с мангалом. На остров с комфортом доставили и забрали. На территории фигуры зверей ручной работы хозяина создают сказочную атмосферу. Вид из окна — живая картина!</p>
+          </article>
+
+          <!-- Отзыв 6: Ирина Овчинникова -->
+          <article class="review-item-card">
+            <div class="review-header-line">
+              <div class="review-user-group">
+                <div class="review-avatar">
+                  <img src="https://20.img.avito.st/image/1/1.KOf3Oba1kg6Bm0YNqykOpZ2bhg5JkkYNgZuGDA.230n9pKLSqCy2Dug5n6cGQjZj8hE9P8Oqt4YErpvGKo?cqp=2.EI1aZg-3nTjj2X2l0mbh9ealZRk=" alt="Ирина Овчинникова">
+                </div>
+                <div class="review-name-date">
+                  <span class="review-author">Ирина Овчинникова</span>
+                  <span class="review-date">4 мая</span>
+                </div>
+              </div>
+              <div class="review-stars">
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <p class="review-body-text">Поездка была подарком сыну на день рождения. Сын в полном восторге от места: домик уютный, природа красивущая, хозяин Илья — очень приятный человек. Огромная благодарность за отличный мужской отдых!</p>
+          </article>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- ДЕТАЛЬНЫЙ ЭКРАН -->
+    <div id="detailScreen" class="screen-detail">
+      <div class="detail-topbar detail-anim-node d-delay-1">
+        <button class="btn-circle-back" onclick="returnToMain()" aria-label="Назад">
+          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="detail-location-pill" id="detailHeaderLocation">📍 о. Кюльвяянсаари</span>
+      </div>
+
+      <!-- СЛАЙДЕР -->
+      <div class="showcase-module detail-anim-node d-delay-2">
+        <div class="carousel-stage" id="carouselStage">
+          <button class="btn-open-story" onclick="openStorySheet(event)">
+            <svg class="book-ico" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Читать о доме</span>
+            <svg class="chevron-ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          
+          <button class="btn-zoom-corner" onclick="triggerLightbox()">
+            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+
+          <button class="slider-arrow-btn prev" onclick="manualSlide(-1)">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-arrow-btn next" onclick="manualSlide(1)">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+
+        <div class="thumb-strip" id="thumbStrip"></div>
+      </div>
+
+      <!-- ЧИСТЫЙ ТИТУЛ КАРТОЧКИ: ИДЕНТИЧНЫЙ ОТСТУП 17px -->
+      <div class="detail-hero-box detail-anim-node d-delay-3">
+        <h1 class="detail-title-text" id="detailTitle"></h1>
+        <div class="detail-season-price-row">
+          <span class="season-price-label">Актуальная цена</span>
+          <span class="season-price-val" id="detailSeasonPrice">14 000 ₽ <small>/ сутки</small></span>
+        </div>
+      </div>
+
+      <!-- РАЗДЕЛИТЕЛЬНАЯ ЛИНИЯ -->
+      <div class="detail-divider-line detail-anim-node d-delay-3"></div>
+
+      <!-- ТЕГИ -->
+      <div class="tags-flow detail-anim-node d-delay-3" id="detailTags"></div>
+
+      <!-- СВОДКА ИКОНОК -->
+      <div class="quick-specs-grid detail-anim-node d-delay-4" id="quickSpecs"></div>
+
+      <!-- ХАРАКТЕРИСТИКИ -->
+      <div class="editorial-section detail-anim-node d-delay-4">
+        <div class="section-title-line">Характеристики дома</div>
+        <div class="specs-flow-list" id="detailParamsList"></div>
+      </div>
+
+      <!-- ПРАВИЛА ПРОЖИВАНИЯ -->
+      <div class="editorial-section detail-anim-node d-delay-5">
+        <div class="section-title-line">Правила проживания</div>
+        <div class="rules-bullet-list" id="detailRulesList"></div>
+      </div>
+
+      <!-- КАРТА -->
+      <div class="editorial-section detail-anim-node d-delay-6">
+        <div class="map-header-row">
+          <span id="detailAddress" class="map-addr-text"></span>
+          <button type="button" class="map-icon-btn" id="mapToggleBtn" onclick="toggleMapHeight(event)" aria-label="Развернуть карту">
+            <svg id="mapExpandIco" viewBox="0 0 24 24">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+          </button>
+        </div>
+        <div class="map-frame-wrap" id="mapCanvas">
+          <iframe id="mapFrame" src="" allowfullscreen="true"></iframe>
+        </div>
+      </div>
+
+      <!-- КАК ДОБРАТЬСЯ -->
+      <div class="editorial-section detail-anim-node d-delay-7">
+        <div class="section-title-line">Как добраться</div>
+        
+        <div class="directions-steps-wrap">
+          <div class="direction-step">
+            <div class="step-ico-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.5l1.8-3.6A2 2 0 0 1 10.1 2h3.8a2 2 0 0 1 1.8 1.4L17.5 7H19a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0"/>
+              </svg>
+            </div>
+            <div class="step-info">
+              <span class="step-title">До Лахденпохья</span>
+              <span class="step-desc">Удобный подъезд на авто или поезде. Есть охраняемая парковка по договорённости.</span>
+            </div>
+          </div>
+
+          <div class="direction-step">
+            <div class="step-ico-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M2 20c3 0 4-2 7-2s4 2 7 2 4-2 6-2M4 14l16-2-2.5-6H10L8 14zM12 6V2"/>
+              </svg>
+            </div>
+            <div class="step-info">
+              <span class="step-title">15 минут на катере</span>
+              <span class="step-desc">Встречаем в городе и доставляем прямо к пирсу вашего дома.</span>
+            </div>
+          </div>
+
+          <div class="direction-step">
+            <div class="step-ico-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <div class="step-info">
+              <span class="step-title">Трансфер включён</span>
+              <span class="step-desc">1 рейс на лодке туда и обратно входит в стоимость проживания.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ПЛАВАЮЩИЙ БЛОК СВЯЗИ -->
+    <div class="floating-dock-wrap">
+      <div class="floating-dock">
+        <a id="actionWaBtn" href="https://wa.me/79212234682" target="_blank" class="dock-btn dock-wa">
+          <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.07c-.24.67-1.39 1.28-1.92 1.36-.51.08-1.16.11-3.34-.78-2.6-1.07-4.27-3.71-4.4-3.88-.13-.17-1.05-1.4-1.05-2.67 0-1.27.67-1.89.91-2.15.24-.26.52-.33.7-.33.17 0 .35 0 .5.01.16.01.37-.06.58.44.22.52.74 1.82.81 1.95.07.13.11.29.02.47-.09.18-.14.29-.27.45-.14.16-.29.35-.41.47-.14.14-.29.29-.12.57.17.28.75 1.23 1.6 1.99 1.1 1 2.03 1.31 2.32 1.45.29.15.46.13.63-.07.18-.19.75-.87.95-1.17.2-.3.4-.25.68-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.74-.17 1.41z"/></svg>
+          WhatsApp
+        </a>
+        <a id="actionTgBtn" href="https://t.me/+79212234682" target="_blank" class="dock-btn dock-tg">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
+          Telegram
+        </a>
+        <a href="tel:+79212234682" class="dock-btn dock-tel">
+          Позвонить
+        </a>
+      </div>
+    </div>
+
+    <!-- ПОПАП ОПИСАНИЯ -->
+    <div class="story-modal-backdrop" id="storyModal" onclick="closeStorySheet(event)">
+      <div class="story-sheet" onclick="event.stopPropagation()">
+        <div class="sheet-drag-handle"></div>
+        <h3 class="sheet-title" id="sheetTitle">О доме</h3>
+        <div class="sheet-text-scroll" id="sheetText"></div>
+        <button class="sheet-close-btn" onclick="closeStorySheet()">Понятно</button>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="photoLightbox" class="photo-modal-preview">
+      <button class="modal-close-ico" onclick="dismissLightbox()">&times;</button>
+      <div class="lightbox-carousel" id="lightboxSwipeZone">
+        <img id="lightboxTargetImg" class="modal-target-img" src="" alt="Фото дома">
+        <div class="lightbox-counter-badge" id="lightboxCounter">1 / 1</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. АВТОМАТИЧЕСКИЙ РАСЧЕТ СЕЗОННОЙ ЦЕНЫ
+    function getCurrentSeasonPrice() {
+      const month = new Date().getMonth();
+      let price = 14000;
+
+      if (month >= 5 && month <= 7) {
+        price = 15000;
+      } else {
+        price = 14000;
+      }
+      return { price };
+    }
+
+    const seasonData = getCurrentSeasonPrice();
+    const formattedPrice = seasonData.price.toLocaleString('ru-RU') + ' ₽';
+
+    document.getElementById('mainCardPrice1').innerHTML = `от ${formattedPrice} <small>/ сутки</small>`;
+    document.getElementById('mainCardPrice2').innerHTML = `от ${formattedPrice} <small>/ сутки</small>`;
+
+    // Векторные иконки по контексту
+    const TAG_ICONS = {
+      beach: '<svg viewBox="0 0 24 24"><path d="M2 13c3 0 4-2 7-2s4 2 7 2 4-2 6-2"/><path d="M2 18c3 0 4-2 7-2s4 2 7 2 4-2 6-2"/></svg>',
+      heater: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>',
+      linen: '<svg viewBox="0 0 24 24"><path d="M2 19h20M2 10v9M22 10v9M2 15h20M4 10a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5H4v-5z"/></svg>',
+      hygiene: '<svg viewBox="0 0 24 24"><path d="m19 5-3-3a1.5 1.5 0 0 0-2.12 0L3.29 12.59a1.5 1.5 0 0 0 0 2.12l6 6a1.5 1.5 0 0 0 2.12 0L22 10.12A1.5 1.5 0 0 0 22 8l-3-3zM9.5 18.5l-4-4L14 6l4 4-8.5 8.5z"/><line x1="16" y1="4" x2="18" y2="6"/><line x1="14" y1="6" x2="16" y2="8"/><line x1="12" y1="8" x2="14" y2="10"/></svg>',
+      kids: '<svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.5"/><path d="M6 21v-5a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v5"/><path d="M9 15v6M15 15v6"/></svg>'
+    };
+
+    // 2. ТОЧНЫЕ СПИСКИ ФОТОГРАФИЙ (строго по списку Vercel, без 2.3)
+    const house1Photos = [
+      "house1/main.jpg",
+      "house1/1.3.3",
+      "house1/1.4",
+      "house1/1.5",
+      "house1/1.6",
+      "house1/1.7",
+      "house1/1.8",
+      "house1/1.9",
+      "house1/1.10.1",
+      "house1/1.11",
+      "house1/1.12",
+      "house1/1.13",
+      "house1/1.14",
+      "house1/1.15",
+      "house1/1.16",
+      "house1/1.17",
+      "house1/1.18",
+      "house1/1.19",
+      "house1/1.20",
+      "house1/1.22",
+      "house1/1.23",
+      "house1/1.24",
+      "house1/1.24.1",
+      "house1/1.25",
+      "house1/1.26",
+      "house1/1.27",
+      "house1/1.28",
+      "house1/1.30",
+      "house1/1.31",
+      "house1/1.32.jpg"
+    ];
+
+    const house2Photos = [
+      "house2/main.jpg",
+      "house2/2.2",
+      "house2/2.4",
+      "house2/2.5",
+      "house2/2.6",
+      "house2/2.7",
+      "house2/2.8",
+      "house2/2.9",
+      "house2/2.10",
+      "house2/2.11",
+      "house2/2.12",
+      "house2/2.13",
+      "house2/2.14",
+      "house2/2.15",
+      "house2/2.16",
+      "house2/2.17",
+      "house2/2.18",
+      "house2/2.19",
+      "house2/2.20",
+      "house2/2.21",
+      "house2/2.23",
+      "house2/2.24",
+      "house2/2.25",
+      "house2/2.26",
+      "house2/2.27",
+      "house2/2.28",
+      "house2/2.31",
+      "house2/2.32",
+      "house2/2.33.jpg"
+    ];
+
+    // 3. БАЗА ДАННЫХ
+    const residences = {
+      house1: {
+        title: "«Еловый Берег»",
+        price: formattedPrice,
+        location: "о. Кюльвяянсаари",
+        address: "Карелия, Лахденпохский р-н, Мийнальское сельское поселение, о. Кюльвяянсаари",
+        mapWidget: "https://yandex.ru/map-widget/v1/?ll=30.278803%2C61.502089&z=15&pt=30.278803,61.502089,pm2rdm",
+        tags: [
+          { name: "1.7 км до пляжа", icon: TAG_ICONS.beach },
+          { name: "Можно с детьми", icon: TAG_ICONS.kids },
+          { name: "Постельное белье", icon: TAG_ICONS.linen }
+        ],
+        specs: [
+          { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', val: "5 гостей", sub: "Вместимость (+2)" },
+          { icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>', val: "3 комнаты", sub: "60 м² • 2 эт." },
+          { icon: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>', val: "Сауна", sub: "Внутри дома" },
+          { icon: '<path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>', val: "Wi-Fi", sub: "4G связь" }
+        ],
+        photos: house1Photos,
+        params: [
+          { name: "Количество комнат", val: "3" },
+          { name: "Площадь дома", val: "60 м²" },
+          { name: "Площадь участка", val: "15 сот." },
+          { name: "Этажей в доме", val: "2" },
+          { name: "Для отдыха", val: "Баня или сауна" },
+          { name: "Санузел", val: "1 раздельный внутри" },
+          { name: "Коммуникации", val: "Электричество, газ, отопление, канализация" },
+          { name: "Дополнительная мебель", val: "Детский стульчик" },
+          { name: "Бытовая техника", val: "Холодильник, плита" },
+          { name: "Интернет, связь", val: "Мобильная связь, Wi-Fi 4G" },
+          { name: "Комфорт", val: "Чистое постельное белье" },
+          { name: "Транспорт", val: "Асфальтированная дорога, ж/д станция" },
+          { name: "Залог", val: "5 000 ₽" },
+          { name: "Расстояние до центра", val: "5 км" }
+        ],
+        rules: [
+          "<strong>Заезд с 14:00 • Выезд до 12:00</strong>",
+          "Количество гостей: <strong>до 5 (+2 доп. места)</strong>",
+          "Можно с детьми: <strong>да</strong>",
+          "С питомцами: <strong>нет</strong>",
+          "Курение и вечеринки: <strong>запрещены</strong>",
+          "Отчётные документы: <strong>предоставляются</strong>",
+          "Дом сдаётся <strong>от двух суток</strong>"
+        ],
+        story: `Для вас уютный дом в уединённом месте на острове Ладожского озера. Построен в 2023 г. Вместимость дома до 5 человек +2.
+
+В доме имеется сауна. Доставка (1 рейс) и обратно входит в стоимость. Есть удобный плавучий пирс.
+
+Также имеется зона барбекю, беседка, мангал. По необходимости сдаем лодку с мотором в прокат. Прокат сапов. 
+
+Постельное бельё предоставляется. Есть газовая плита, свет 12 вольт, вода, холодильник. Зарядка телефона через розетку-USB. Связь отличная 4G, есть Wi-Fi. В доме имеется вся необходимая посуда. Парковка для авто под присмотром по договорённости. 
+
+Дом сдаётся от двух суток. Также предоставляется катание на катере с капитаном по Ладожским шхерам, поездка на Валаам. Предлагаем заброску с палатками на острова в Ладожском озере (Лахденпохский район), цена договорная.`
+      },
+
+      house2: {
+        title: "«Берёзовый Хутор»",
+        price: formattedPrice,
+        location: "о. Кюльвяянсаари",
+        address: "Карелия, Лахденпохский р-н, Мийнальское сельское поселение, о. Кюльвяянсаари",
+        mapWidget: "https://yandex.ru/map-widget/v1/?ll=30.278329%2C61.502610&z=15&pt=30.278329,61.502610,pm2rdm",
+        tags: [
+          { name: "1.8 км до пляжа", icon: TAG_ICONS.beach },
+          { name: "Водонагреватель", icon: TAG_ICONS.heater },
+          { name: "Можно с детьми", icon: TAG_ICONS.kids },
+          { name: "Постельное белье", icon: TAG_ICONS.linen },
+          { name: "Средства гигиены", icon: TAG_ICONS.hygiene }
+        ],
+        specs: [
+          { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', val: "4 гостя", sub: "Вместимость" },
+          { icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>', val: "2 комнаты", sub: "40 м² • 2 эт." },
+          { icon: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>', val: "Баня рустик", sub: "Отдельная" },
+          { icon: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>', val: "Терраса", sub: "Вид на Ладогу" }
+        ],
+        photos: house2Photos,
+        params: [
+          { name: "Количество комнат", val: "2" },
+          { name: "Площадь дома", val: "40 м²" },
+          { name: "Площадь участка", val: "15 сот." },
+          { name: "Этажей в доме", val: "2" },
+          { name: "Для отдыха", val: "Отдельная баня / сауна" },
+          { name: "Доп. помещения", val: "Терраса или веранда" },
+          { name: "Санузел", val: "1 на улице" },
+          { name: "Коммуникации", val: "Электричество, газ, отопление, канализация" },
+          { name: "Бытовая техника", val: "Холодильник, плита, водонагреватель" },
+          { name: "Комфорт", val: "Чистое постельное белье, средства гигиены" },
+          { name: "Парковка", val: "1 место без навеса" },
+          { name: "Транспорт", val: "Асфальтированная дорога" },
+          { name: "Залог", val: "1 000 ₽" },
+          { name: "Расстояние до центра", val: "5 км (15 мин на лодке)" }
+        ],
+        rules: [
+          "<strong>Заезд с 14:00 • Выезд до 12:00</strong>",
+          "Количество гостей: <strong>до 4-5 человек</strong>",
+          "Можно с детьми: <strong>да</strong>",
+          "С животными: <strong>по договорённости</strong>",
+          "Курение и вечеринки: <strong>запрещены</strong>",
+          "Отчётные документы: <strong>предоставляются</strong>",
+          "Дом сдаётся <strong>от двух суток</strong>"
+        ],
+        story: `Для вас уютный домик и отдельная баня в рустикальном стиле на острове Ладожского озера. Уединенное место. Природа, шхеры, тишина, рыбалка, ягоды. 15 минут от города Лахденпохья по воде.
+
+Вместимость дома до 5 человек. Доставка (1 рейс) на лодке туда и обратно входит в стоимость.
+
+Есть удобный плавучий пирс, оборудован лестницей для купания. Зона барбекю: беседка, мангал, самовар на дровах. По необходимости сдаем лодку в прокат, прокат сапов.
+
+Постельное белье предоставляется. Есть газовая плита, свет, вода. В доме имеется вся необходимая посуда. Парковка под присмотром по договорённости. Электричество от солнечных батарей 12 вольт, зарядка телефона — USB. Интернет и связь отличная.
+
+С животными по договорённости. Дом сдаётся от двух суток! Предоставляется катание на катере с капитаном по Ладожским шхерам, поездка на Валаам, заброска с палатками на острова.`
+      }
+    };
+
+    let activeHouseKey = null;
+    let currentSlideIndex = 0;
+    let autoSlideTimer = null;
+
+    // 4. ПЕРЕХОД К ДОМИКУ
+    function navigateToHouse(key) {
+      activeHouseKey = key;
+      currentSlideIndex = 0;
+      const item = residences[key];
+
+      document.body.classList.add('in-detail');
+      document.getElementById('detailHeaderLocation').textContent = `📍 ${item.location}`;
+      document.getElementById('detailTitle').textContent = item.title;
+      document.getElementById('detailSeasonPrice').innerHTML = `${item.price} <small>/ сутки</small>`;
+      document.getElementById('detailAddress').textContent = item.address;
+      document.getElementById('mapFrame').src = item.mapWidget;
+
+      document.getElementById('sheetTitle').textContent = item.title;
+      document.getElementById('sheetText').textContent = item.story;
+
+      // Теги
+      const tagsBox = document.getElementById('detailTags');
+      tagsBox.innerHTML = item.tags.map(t => `
+        <div class="feature-tag">
+          ${t.icon}
+          <span>${t.name}</span>
+        </div>
+      `).join('');
+
+      // Иконки сводки
+      const specsBox = document.getElementById('quickSpecs');
+      specsBox.innerHTML = item.specs.map(s => `
+        <div class="quick-spec-cell">
+          <div class="spec-icon-wrap">
+            <svg viewBox="0 0 24 24">${s.icon}</svg>
+          </div>
+          <span class="spec-cell-val">${s.val}</span>
+          <span class="spec-cell-sub">${s.sub}</span>
+        </div>
+      `).join('');
+
+      // Характеристики
+      const paramsBox = document.getElementById('detailParamsList');
+      paramsBox.innerHTML = item.params.map(p => `
+        <div class="spec-item-row">
+          <span class="spec-item-label">${p.name}</span>
+          <span class="spec-item-dotline"></span>
+          <span class="spec-item-val">${p.val}</span>
+        </div>
+      `).join('');
+
+      // Правила
+      const rulesBox = document.getElementById('detailRulesList');
+      rulesBox.innerHTML = item.rules.map(r => `
+        <div class="rule-item-row">
+          <div class="rule-bullet">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div class="rule-text">${r}</div>
+        </div>
+      `).join('');
+
+      // Слайдер
+      const track = document.getElementById('carouselTrack');
+      track.innerHTML = item.photos.map(p => `
+        <div class="carousel-slide-item" onclick="triggerLightbox()">
+          <img src="${p}" alt="${item.title}">
+        </div>
+      `).join('');
+
+      // Превью
+      const thumbStrip = document.getElementById('thumbStrip');
+      thumbStrip.innerHTML = item.photos.map((p, i) => `
+        <div class="thumb-node ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})">
+          <img src="${p}" alt="Превью ${i + 1}">
+        </div>
+      `).join('');
+
+      updateCarouselPosition();
+
+      // Карта
+      document.getElementById('mapCanvas').classList.remove('open');
+      document.getElementById('mapExpandIco').innerHTML = '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>';
+
+      setupMessengerLinks(item.title);
+
+      const dScreen = document.getElementById('detailScreen');
+      dScreen.classList.remove('active');
+      void dScreen.offsetWidth;
+
+      document.getElementById('mainScreen').classList.add('hidden');
+      dScreen.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
+      startAutoCarousel();
+    }
+
+    function returnToMain() {
+      clearInterval(autoSlideTimer);
+      document.body.classList.remove('in-detail');
+      document.getElementById('detailScreen').classList.remove('active');
+      document.getElementById('mainScreen').classList.remove('hidden');
+      setupMessengerLinks(null);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function setupMessengerLinks(houseTitle) {
+      let msg = "Здравствуйте! Подскажите, пожалуйста, какие даты свободны для отдыха и какая актуальная стоимость?";
+      if (houseTitle) {
+        msg = `Здравствуйте! Интересует домик ${houseTitle}. Подскажите, пожалуйста, какие даты свободны и какая актуальная стоимость?`;
+      }
+      const encodedMsg = encodeURIComponent(msg);
+
+      document.getElementById('actionWaBtn').href = `https://wa.me/79212234682?text=${encodedMsg}`;
+      document.getElementById('actionTgBtn').href = `https://t.me/+79212234682?text=${encodedMsg}`;
+    }
+
+    setupMessengerLinks(null);
+
+    // СЛАЙДЕР И НАВИГАЦИЯ
+    function goToSlide(index) {
+      const count = residences[activeHouseKey].photos.length;
+      currentSlideIndex = (index + count) % count;
+      updateCarouselPosition();
+      restartAutoCarousel();
+    }
+
+    function manualSlide(dir) {
+      goToSlide(currentSlideIndex + dir);
+    }
+
+    function updateCarouselPosition() {
+      const track = document.getElementById('carouselTrack');
+      if (track) {
+        track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+      }
+
+      const strip = document.getElementById('thumbStrip');
+      const thumbs = document.querySelectorAll('.thumb-node');
+      
+      thumbs.forEach((t, idx) => {
+        const isActive = idx === currentSlideIndex;
+        t.classList.toggle('active', isActive);
+        if (isActive && strip) {
+          const targetLeft = t.offsetLeft - (strip.offsetWidth / 2) + (t.offsetWidth / 2);
+          strip.scrollTo({ left: targetLeft, behavior: 'smooth' });
+        }
+      });
+    }
+
+    function startAutoCarousel() {
+      clearInterval(autoSlideTimer);
+      autoSlideTimer = setInterval(() => {
+        if (!activeHouseKey) return;
+        const count = residences[activeHouseKey].photos.length;
+        currentSlideIndex = (currentSlideIndex + 1) % count;
+        updateCarouselPosition();
+      }, 5000);
+    }
+
+    function restartAutoCarousel() {
+      startAutoCarousel();
+    }
+
+    // Touch-свайпы
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const stage = document.getElementById('carouselStage');
+
+    stage.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 40) {
+        manualSlide(1);
+      } else if (touchEndX - touchStartX > 40) {
+        manualSlide(-1);
+      }
+    }, { passive: true });
+
+    // Шторка описания
+    function openStorySheet(e) {
+      e.stopPropagation();
+      document.getElementById('storyModal').classList.add('open');
+    }
+
+    function closeStorySheet() {
+      document.getElementById('storyModal').classList.remove('open');
+    }
+
+    // Раскрытие карты
+    function toggleMapHeight(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const canvas = document.getElementById('mapCanvas');
+      const ico = document.getElementById('mapExpandIco');
+      const isOpen = canvas.classList.toggle('open');
+      
+      if (isOpen) {
+        ico.innerHTML = '<path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>';
+      } else {
+        ico.innerHTML = '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>';
+      }
+    }
+
+    // Lightbox
+    let lbTouchStartX = 0;
+    let lbTouchEndX = 0;
+
+    function triggerLightbox() {
+      updateLightboxContent();
+      document.getElementById('photoLightbox').classList.add('active');
+    }
+
+    function dismissLightbox() {
+      document.getElementById('photoLightbox').classList.remove('active');
+    }
+
+    function updateLightboxContent() {
+      const photos = residences[activeHouseKey].photos;
+      const targetImg = document.getElementById('lightboxTargetImg');
+      targetImg.src = photos[currentSlideIndex];
+      document.getElementById('lightboxCounter').textContent = `${currentSlideIndex + 1} / ${photos.length}`;
+    }
+
+    const lbSwipeZone = document.getElementById('lightboxSwipeZone');
+    lbSwipeZone.addEventListener('touchstart', e => {
+      lbTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lbSwipeZone.addEventListener('touchend', e => {
+      lbTouchEndX = e.changedTouches[0].screenX;
+      if (lbTouchStartX - lbTouchEndX > 45) {
+        goToSlide(currentSlideIndex + 1);
+        updateLightboxContent();
+      } else if (lbTouchEndX - lbTouchStartX > 45) {
+        goToSlide(currentSlideIndex - 1);
+        updateLightboxContent();
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
