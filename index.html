@@ -160,7 +160,6 @@
       transition: transform 0.8s var(--ease);
     }
 
-    /* Дом 1: main.jpg, зум 20%, прилипание вправо */
     .card-zoom-h1 img {
       object-position: right center !important;
       transform: scale(1.2);
@@ -171,7 +170,6 @@
       transform: scale(1.24);
     }
 
-    /* Дом 2: естественный размер без зума, прижим вправо */
     .card-zoom-h2 img {
       object-position: right center !important;
       transform: scale(1.0);
@@ -287,7 +285,7 @@
     .reviews-header-aesthetic {
       background: var(--surface);
       border-radius: var(--radius-xl);
-      padding: 30px 22px 28px;
+      padding: 24px 22px 22px;
       border: 1px solid var(--border-subtle);
       box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.03);
       margin-bottom: 16px;
@@ -303,7 +301,7 @@
     }
     .score-aesthetic-num {
       font-family: 'Playfair Display', serif;
-      font-size: 48px;
+      font-size: 46px;
       font-weight: 600;
       line-height: 1;
       color: var(--brand);
@@ -317,7 +315,7 @@
     .score-info-wrap {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       flex: 1;
     }
     .stars-aesthetic-row {
@@ -330,15 +328,10 @@
       fill: var(--star-ya);
     }
     .score-meta-text {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--brand);
       letter-spacing: 0.2px;
-    }
-    .score-sub-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.25;
     }
 
     /* КОМПАКТНЫЙ ВЕРТИКАЛЬНЫЙ СПИСОК ОТЗЫВОВ */
@@ -649,7 +642,7 @@
       box-shadow: 0 6px 14px rgba(34, 56, 47, 0.2);
     }
 
-    /* ШАПКА КАРТОЧКИ: ИДЕНТИЧНЫЙ ОТСТУП 17px */
+    /* ШАПКА КАРТОЧКИ */
     .detail-hero-box {
       margin-bottom: 0px;
       padding: 4px 2px 0;
@@ -1028,8 +1021,6 @@
       height: 15px;
       fill: #FFFFFF;
     }
-    
-    /* Кнопка "Позвонить" - спокойная, без сияния и пульсаций */
     .dock-tel {
       background: #F4F6F4;
       color: var(--brand);
@@ -1177,20 +1168,20 @@
       </header>
 
       <section class="houses-stream">
-        <!-- Карточка 1: Еловый Берег -->
+        <!-- Карточка 1: Еловый дом -->
         <article class="editorial-card card-zoom-h1 anim-in delay-1" onclick="navigateToHouse('house1')">
-          <img src="house1/main.jpg" alt="Домик «Еловый Берег»">
+          <img src="house1/main.jpg" alt="«Еловый дом»">
           <div class="card-scrim"></div>
           
           <div class="card-badges-wrap">
+            <span class="card-badge-pill">1-я линия озера</span>
             <span class="card-badge-pill">Сауна внутри дома</span>
-            <span class="card-badge-pill">Панорамный вид</span>
             <span class="card-badge-pill">Плавучий пирс</span>
           </div>
 
           <div class="card-content-bottom">
             <span class="card-meta-line">3-к. дом • 60 м² • До 5 гостей</span>
-            <h2 class="card-name-title">«Еловый Берег»</h2>
+            <h2 class="card-name-title">«Еловый дом»</h2>
             <div class="card-bottom-row">
               <div class="card-cost" id="mainCardPrice1">от 14 000 ₽ <small>/ сутки</small></div>
               <div class="card-open-btn">
@@ -1200,20 +1191,20 @@
           </div>
         </article>
 
-        <!-- Карточка 2: Берёзовый Хутор -->
+        <!-- Карточка 2: Берёзовый дом -->
         <article class="editorial-card card-zoom-h2 anim-in delay-2" onclick="navigateToHouse('house2')">
-          <img src="house2/main.jpg" alt="Домик «Берёзовый Хутор»">
+          <img src="house2/main.jpg" alt="«Берёзовый дом»">
           <div class="card-scrim"></div>
           
           <div class="card-badges-wrap">
+            <span class="card-badge-pill">1-я линия озера</span>
             <span class="card-badge-pill">Отдельная баня рустик</span>
-            <span class="card-badge-pill">Панорамная терраса</span>
-            <span class="card-badge-pill">Самовар на дровах</span>
+            <span class="card-badge-pill">Беседка и волейбол</span>
           </div>
 
           <div class="card-content-bottom">
-            <span class="card-meta-line">2-к. дом • 40 м² • До 4 гостей</span>
-            <h2 class="card-name-title">«Берёзовый Хутор»</h2>
+            <span class="card-meta-line">2-к. дом • 40 м² • До 4-5 гостей</span>
+            <h2 class="card-name-title">«Берёзовый дом»</h2>
             <div class="card-bottom-row">
               <div class="card-cost" id="mainCardPrice2">от 14 000 ₽ <small>/ сутки</small></div>
               <div class="card-open-btn">
@@ -1224,9 +1215,8 @@
         </article>
       </section>
 
-      <!-- БЛОК ОТЗЫВОВ -->
+      <!-- БЛОК РЕЙТИНГА И ОТЗЫВОВ -->
       <section class="reviews-section anim-in delay-3">
-        <!-- Шапка рейтинга: выше по высоте, цифра 48px, золотисто-желтые звёзды яндекса -->
         <div class="reviews-header-aesthetic">
           <div class="score-aesthetic-wrap">
             <span class="score-aesthetic-num">5.0</span>
@@ -1240,14 +1230,11 @@
               <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
               <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             </div>
-            <div class="score-meta-text">Рейтинг 5.0 • 29 отзывов</div>
-            <div class="score-sub-label">100% гостей рекомендуют отдых в шхерах</div>
+            <div class="score-meta-text">5.0 • трансфер включен</div>
           </div>
         </div>
 
-        <!-- Компактный вертикальный стек отзывов -->
         <div class="reviews-stack">
-          
           <!-- Отзыв 1: Денис -->
           <article class="review-item-card">
             <div class="review-header-line">
@@ -1381,7 +1368,6 @@
             </div>
             <p class="review-body-text">Поездка была подарком сыну на день рождения. Сын в полном восторге от места: домик уютный, природа красивущая, хозяин Илья — очень приятный человек. Огромная благодарность за отличный мужской отдых!</p>
           </article>
-
         </div>
       </section>
     </main>
@@ -1392,10 +1378,10 @@
         <button class="btn-circle-back" onclick="returnToMain()" aria-label="Назад">
           <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </button>
-        <span class="detail-location-pill" id="detailHeaderLocation">📍 о. Кюльвяянсаари</span>
+        <span class="detail-location-pill" id="detailHeaderLocation">📍 о. Кюльвянсаари</span>
       </div>
 
-      <!-- СЛАЙДЕР -->
+      <!-- СЛАЙДЕР (ТОЛЬКО НОВЫЕ ФОТО) -->
       <div class="showcase-module detail-anim-node d-delay-2">
         <div class="carousel-stage" id="carouselStage">
           <button class="btn-open-story" onclick="openStorySheet(event)">
@@ -1421,11 +1407,11 @@
         <div class="thumb-strip" id="thumbStrip"></div>
       </div>
 
-      <!-- ЧИСТЫЙ ТИТУЛ КАРТОЧКИ: ИДЕНТИЧНЫЙ ОТСТУП 17px -->
+      <!-- ШАПКА КАРТОЧКИ -->
       <div class="detail-hero-box detail-anim-node d-delay-3">
         <h1 class="detail-title-text" id="detailTitle"></h1>
         <div class="detail-season-price-row">
-          <span class="season-price-label">Актуальная цена</span>
+          <span class="season-price-label">Актуальная цена (до 5 чел)</span>
           <span class="season-price-val" id="detailSeasonPrice">14 000 ₽ <small>/ сутки</small></span>
         </div>
       </div>
@@ -1447,7 +1433,7 @@
 
       <!-- ПРАВИЛА ПРОЖИВАНИЯ -->
       <div class="editorial-section detail-anim-node d-delay-5">
-        <div class="section-title-line">Правила проживания</div>
+        <div class="section-title-line">Правила проживания и бронирования</div>
         <div class="rules-bullet-list" id="detailRulesList"></div>
       </div>
 
@@ -1479,7 +1465,19 @@
             </div>
             <div class="step-info">
               <span class="step-title">До Лахденпохья</span>
-              <span class="step-desc">Удобный подъезд на авто или поезде. Есть охраняемая парковка по договорённости.</span>
+              <span class="step-desc">230 км из Санкт-Петербурга по трассе «А121-Сортавала» или 3,5 часа на Ласточке с Финляндского вокзала до станции Яккима.</span>
+            </div>
+          </div>
+
+          <div class="direction-step">
+            <div class="step-ico-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 10.9 2 11.2 2 11.5V16c0 .6.4 1 1 1h2m10 0a2 2 0 1 0 4 0m-14 0a2 2 0 1 0 4 0"/>
+              </svg>
+            </div>
+            <div class="step-info">
+              <span class="step-title">Охраняемая парковка</span>
+              <span class="step-desc">Гости приезжают на платную парковку на берегу, где машина остаётся под присмотром на всё время отдыха.</span>
             </div>
           </div>
 
@@ -1490,20 +1488,8 @@
               </svg>
             </div>
             <div class="step-info">
-              <span class="step-title">15 минут на катере</span>
-              <span class="step-desc">Встречаем в городе и доставляем прямо к пирсу вашего дома.</span>
-            </div>
-          </div>
-
-          <div class="direction-step">
-            <div class="step-ico-box">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4"/>
-              </svg>
-            </div>
-            <div class="step-info">
-              <span class="step-title">Трансфер включён</span>
-              <span class="step-desc">1 рейс на лодке туда и обратно входит в стоимость проживания.</span>
+              <span class="step-title">Трансфер на катере (10 минут)</span>
+              <span class="step-desc">Быстрый и живописный трансфер по воде на катере прямо до пирса на острове. 1 рейс туда и обратно включён в стоимость!</span>
             </div>
           </div>
         </div>
@@ -1549,11 +1535,10 @@
   </div>
 
   <script>
-    // 1. АВТОМАТИЧЕСКИЙ РАСЧЕТ СЕЗОННОЙ ЦЕНЫ
+    // 1. СЕЗОННАЯ ЦЕНА
     function getCurrentSeasonPrice() {
       const month = new Date().getMonth();
       let price = 14000;
-
       if (month >= 5 && month <= 7) {
         price = 15000;
       } else {
@@ -1568,97 +1553,90 @@
     document.getElementById('mainCardPrice1').innerHTML = `от ${formattedPrice} <small>/ сутки</small>`;
     document.getElementById('mainCardPrice2').innerHTML = `от ${formattedPrice} <small>/ сутки</small>`;
 
-    // Векторные иконки по контексту
+    // Векторные иконки
     const TAG_ICONS = {
-      beach: '<svg viewBox="0 0 24 24"><path d="M2 13c3 0 4-2 7-2s4 2 7 2 4-2 6-2"/><path d="M2 18c3 0 4-2 7-2s4 2 7 2 4-2 6-2"/></svg>',
+      water: '<svg viewBox="0 0 24 24"><path d="M2 12c3 0 4-2 7-2s4 2 7 2 4-2 6-2M2 17c3 0 4-2 7-2s4 2 7 2 4-2 6-2"/></svg>',
       heater: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>',
       linen: '<svg viewBox="0 0 24 24"><path d="M2 19h20M2 10v9M22 10v9M2 15h20M4 10a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5H4v-5z"/></svg>',
-      hygiene: '<svg viewBox="0 0 24 24"><path d="m19 5-3-3a1.5 1.5 0 0 0-2.12 0L3.29 12.59a1.5 1.5 0 0 0 0 2.12l6 6a1.5 1.5 0 0 0 2.12 0L22 10.12A1.5 1.5 0 0 0 22 8l-3-3zM9.5 18.5l-4-4L14 6l4 4-8.5 8.5z"/><line x1="16" y1="4" x2="18" y2="6"/><line x1="14" y1="6" x2="16" y2="8"/><line x1="12" y1="8" x2="14" y2="10"/></svg>',
-      kids: '<svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.5"/><path d="M6 21v-5a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v5"/><path d="M9 15v6M15 15v6"/></svg>'
+      hygiene: '<svg viewBox="0 0 24 24"><path d="m19 5-3-3a1.5 1.5 0 0 0-2.12 0L3.29 12.59a1.5 1.5 0 0 0 0 2.12l6 6a1.5 1.5 0 0 0 2.12 0L22 10.12A1.5 1.5 0 0 0 22 8l-3-3zM9.5 18.5l-4-4L14 6l4 4-8.5 8.5z"/></svg>',
+      kids: '<svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3.5"/><path d="M6 21v-5a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v5"/><path d="M9 15v6M15 15v6"/></svg>',
+      pets: '<svg viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 0-5 5v3h10v-3a5 5 0 0 0-5-5z"/></svg>'
     };
 
-    // 2. ТОЧНЫЕ СПИСКИ ФОТОГРАФИЙ (строго по списку Vercel, без 2.3)
+    // 2. СПИСКИ ФОТО ДЛЯ СЛАЙДЕРА
     const house1Photos = [
-      "house1/main.jpg",
-      "house1/1.3.3",
-      "house1/1.4",
-      "house1/1.5",
-      "house1/1.6",
-      "house1/1.7",
-      "house1/1.8",
-      "house1/1.9",
-      "house1/1.10.1",
-      "house1/1.11",
-      "house1/1.12",
-      "house1/1.13",
-      "house1/1.14",
-      "house1/1.15",
-      "house1/1.16",
-      "house1/1.17",
-      "house1/1.18",
-      "house1/1.19",
-      "house1/1.20",
-      "house1/1.22",
-      "house1/1.23",
-      "house1/1.24",
-      "house1/1.24.1",
-      "house1/1.25",
-      "house1/1.26",
-      "house1/1.27",
-      "house1/1.28",
-      "house1/1.30",
-      "house1/1.31",
-      "house1/1.32.jpg"
+      "house1/1.jpg",
+      "house1/2.jpg",
+      "house1/3.PNG",
+      "house1/4.jpg",
+      "house1/5.jpg",
+      "house1/6.jpg",
+      "house1/7.PNG",
+      "house1/8.jpg",
+      "house1/9.jpg",
+      "house1/10.jpg",
+      "house1/11.jpg",
+      "house1/12.jpg",
+      "house1/13.jpg",
+      "house1/14.jpg",
+      "house1/15.jpg",
+      "house1/16.jpg",
+      "house1/17.jpg",
+      "house1/18.jpg",
+      "house1/19.jpg",
+      "house1/20.jpg",
+      "house1/21.jpg",
+      "house1/22.jpg",
+      "house1/23.jpg",
+      "house1/24.jpg",
+      "house1/25.PNG",
+      "house1/26.PNG",
+      "house1/27.PNG",
+      "house1/28.PNG",
+      "house1/29.jpg",
+      "house1/30.jpg"
     ];
 
     const house2Photos = [
-      "house2/main.jpg",
-      "house2/2.2",
-      "house2/2.4",
-      "house2/2.5",
-      "house2/2.6",
-      "house2/2.7",
-      "house2/2.8",
-      "house2/2.9",
-      "house2/2.10",
-      "house2/2.11",
-      "house2/2.12",
-      "house2/2.13",
-      "house2/2.14",
-      "house2/2.15",
-      "house2/2.16",
-      "house2/2.17",
-      "house2/2.18",
-      "house2/2.19",
-      "house2/2.20",
-      "house2/2.21",
-      "house2/2.23",
-      "house2/2.24",
-      "house2/2.25",
-      "house2/2.26",
-      "house2/2.27",
-      "house2/2.28",
-      "house2/2.31",
-      "house2/2.32",
-      "house2/2.33.jpg"
+      "house2/1.jpg",
+      "house2/2.jpg",
+      "house2/3.jpg",
+      "house2/4.jpg",
+      "house2/5.jpg",
+      "house2/6.jpg",
+      "house2/7.jpg",
+      "house2/8.jpg",
+      "house2/9.jpg",
+      "house2/10.jpg",
+      "house2/10 (2).JPG",
+      "house2/11.jpg",
+      "house2/12.jpg",
+      "house2/13.jpg",
+      "house2/14.jpg",
+      "house2/15.jpg",
+      "house2/16.jpg",
+      "house2/17.jpg",
+      "house2/18.jpg",
+      "house2/19.jpg"
     ];
 
     // 3. БАЗА ДАННЫХ
     const residences = {
       house1: {
-        title: "«Еловый Берег»",
+        title: "«Еловый дом»",
         price: formattedPrice,
-        location: "о. Кюльвяянсаари",
-        address: "Карелия, Лахденпохский р-н, Мийнальское сельское поселение, о. Кюльвяянсаари",
+        location: "о. Кюльвянсаари",
+        address: "Карелия, Лахденпохский р-н, Мийнальское с/п, о. Кюльвянсаари (1-я береговая линия)",
         mapWidget: "https://yandex.ru/map-widget/v1/?ll=30.278803%2C61.502089&z=15&pt=30.278803,61.502089,pm2rdm",
         tags: [
-          { name: "1.7 км до пляжа", icon: TAG_ICONS.beach },
+          { name: "1-я береговая линия", icon: TAG_ICONS.water },
           { name: "Можно с детьми", icon: TAG_ICONS.kids },
+          { name: "С питомцами: по договоренности", icon: TAG_ICONS.pets },
           { name: "Постельное белье", icon: TAG_ICONS.linen }
         ],
         specs: [
-          { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', val: "5 гостей", sub: "Вместимость (+2)" },
-          { icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>', val: "3 комнаты", sub: "60 м² • 2 эт." },
+          { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', val: "5 гостей", sub: "Вместимость (+доп)" },
+          { icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>', val: "3 комнаты", sub: "60 м² • 2 этажа" },
           { icon: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>', val: "Сауна", sub: "Внутри дома" },
           { icon: '<path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>', val: "Wi-Fi", sub: "4G связь" }
         ],
@@ -1666,55 +1644,57 @@
         params: [
           { name: "Количество комнат", val: "3" },
           { name: "Площадь дома", val: "60 м²" },
+          { name: "Расположение", val: "1-я береговая линия озера" },
           { name: "Площадь участка", val: "15 сот." },
           { name: "Этажей в доме", val: "2" },
-          { name: "Для отдыха", val: "Баня или сауна" },
-          { name: "Санузел", val: "1 раздельный внутри" },
-          { name: "Коммуникации", val: "Электричество, газ, отопление, канализация" },
-          { name: "Дополнительная мебель", val: "Детский стульчик" },
-          { name: "Бытовая техника", val: "Холодильник, плита" },
-          { name: "Интернет, связь", val: "Мобильная связь, Wi-Fi 4G" },
-          { name: "Комфорт", val: "Чистое постельное белье" },
-          { name: "Транспорт", val: "Асфальтированная дорога, ж/д станция" },
-          { name: "Залог", val: "5 000 ₽" },
-          { name: "Расстояние до центра", val: "5 км" }
+          { name: "Для отдыха", val: "Сауна внутри дома, зона барбекю, беседка, мангал, пирс" },
+          { name: "Санузел", val: "1 внутри дома" },
+          { name: "Коммуникации", val: "Электричество 12V, газ, вода, отопление" },
+          { name: "Бытовая техника", val: "Холодильник, газовая плита, USB-розетки" },
+          { name: "Интернет, связь", val: "Отличная связь 4G, быстрый Wi-Fi" },
+          { name: "Комфорт", val: "Чистое постельное белье, посуда" },
+          { name: "Транспорт и подъезд", val: "230 км по А121 / Ласточка до Яккима, парковка + катер" },
+          { name: "Трансфер", val: "Катер по воде (10 мин), 1 рейс туда-обратно включен" },
+          { name: "Залог", val: "5 000 ₽" }
         ],
         rules: [
           "<strong>Заезд с 14:00 • Выезд до 12:00</strong>",
-          "Количество гостей: <strong>до 5 (+2 доп. места)</strong>",
+          "Цена указана <strong>за 5 человек</strong>. Если больше — доплата <strong>1 500 ₽ / сутки за человека</strong>",
+          "Отмена брони за 2 недели — <strong>100% возврат предоплаты</strong>",
           "Можно с детьми: <strong>да</strong>",
-          "С питомцами: <strong>нет</strong>",
-          "Курение и вечеринки: <strong>запрещены</strong>",
-          "Отчётные документы: <strong>предоставляются</strong>",
+          "С животными: <strong>по договорённости</strong>",
+          "Курение и шумные вечеринки: <strong>запрещены</strong>",
           "Дом сдаётся <strong>от двух суток</strong>"
         ],
-        story: `Для вас уютный дом в уединённом месте на острове Ладожского озера. Построен в 2023 г. Вместимость дома до 5 человек +2.
+        story: `Для вас уютный дом в уединённом месте прямо на берегу Ладожского озера (остров Кюльвянсаари). 
 
-В доме имеется сауна. Доставка (1 рейс) и обратно входит в стоимость. Есть удобный плавучий пирс.
+В доме имеется собственная сауна. Быстрый трансфер на катере по воде (1 рейс туда и обратно) уже входит в стоимость проживания. Для отдыха оборудован удобный плавучий пирс.
 
-Также имеется зона барбекю, беседка, мангал. По необходимости сдаем лодку с мотором в прокат. Прокат сапов. 
+На территории: зона барбекю, беседка, мангал. По необходимости предоставляем лодку с мотором в прокат, а также прокат сапбордов.
 
-Постельное бельё предоставляется. Есть газовая плита, свет 12 вольт, вода, холодильник. Зарядка телефона через розетку-USB. Связь отличная 4G, есть Wi-Fi. В доме имеется вся необходимая посуда. Парковка для авто под присмотром по договорённости. 
+Предоставляется чистое постельное бельё и вся необходимая посуда. Есть газовая плита, свет 12 вольт, вода, холодильник, розетки-USB для зарядки. Отличная связь 4G и Wi-Fi.
 
-Дом сдаётся от двух суток. Также предоставляется катание на катере с капитаном по Ладожским шхерам, поездка на Валаам. Предлагаем заброску с палатками на острова в Ладожском озере (Лахденпохский район), цена договорная.`
+Гости приезжают на платную охраняемую парковку на берегу, где авто остаётся под присмотром, далее 10 минут на катере по воде до острова. 
+
+С животными — по договорённости. Дом сдаётся от двух суток. Также организуем прогулки на катере с капитаном по Ладожским шхерам, поездки на Валаам и заброску с палатками.`
       },
 
       house2: {
-        title: "«Берёзовый Хутор»",
+        title: "«Берёзовый дом»",
         price: formattedPrice,
-        location: "о. Кюльвяянсаари",
-        address: "Карелия, Лахденпохский р-н, Мийнальское сельское поселение, о. Кюльвяянсаари",
+        location: "о. Кюльвянсаари",
+        address: "Карелия, Лахденпохский р-н, Мийнальское с/п, о. Кюльвянсаари (1-я береговая линия)",
         mapWidget: "https://yandex.ru/map-widget/v1/?ll=30.278329%2C61.502610&z=15&pt=30.278329,61.502610,pm2rdm",
         tags: [
-          { name: "1.8 км до пляжа", icon: TAG_ICONS.beach },
-          { name: "Водонагреватель", icon: TAG_ICONS.heater },
-          { name: "Можно с детьми", icon: TAG_ICONS.kids },
+          { name: "1-я береговая линия", icon: TAG_ICONS.water },
+          { name: "Волейбольная площадка", icon: TAG_ICONS.heater },
+          { name: "С питомцами: по договоренности", icon: TAG_ICONS.pets },
           { name: "Постельное белье", icon: TAG_ICONS.linen },
           { name: "Средства гигиены", icon: TAG_ICONS.hygiene }
         ],
         specs: [
-          { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', val: "4 гостя", sub: "Вместимость" },
-          { icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>', val: "2 комнаты", sub: "40 м² • 2 эт." },
+          { icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', val: "4-5 гостей", sub: "Вместимость" },
+          { icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>', val: "2 комнаты", sub: "40 м² • 2 этажа" },
           { icon: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>', val: "Баня рустик", sub: "Отдельная" },
           { icon: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>', val: "Терраса", sub: "Вид на Ладогу" }
         ],
@@ -1722,37 +1702,37 @@
         params: [
           { name: "Количество комнат", val: "2" },
           { name: "Площадь дома", val: "40 м²" },
+          { name: "Расположение", val: "1-я береговая линия озера" },
           { name: "Площадь участка", val: "15 сот." },
           { name: "Этажей в доме", val: "2" },
-          { name: "Для отдыха", val: "Отдельная баня / сауна" },
-          { name: "Доп. помещения", val: "Терраса или веранда" },
+          { name: "Для отдыха", val: "Отдельная беседка с мангальной зоной, качели, 2 гамака, площадка для волейбола, отдельная баня рустик" },
+          { name: "Доп. помещения", val: "Панорамная терраса с видом на озеро" },
           { name: "Санузел", val: "1 на улице" },
-          { name: "Коммуникации", val: "Электричество, газ, отопление, канализация" },
-          { name: "Бытовая техника", val: "Холодильник, плита, водонагреватель" },
+          { name: "Коммуникации", val: "Солнечные батареи 12V, газ, отопление, вода" },
+          { name: "Бытовая техника", val: "Холодильник, газовая плита, самовар на дровах, USB-зарядка" },
           { name: "Комфорт", val: "Чистое постельное белье, средства гигиены" },
-          { name: "Парковка", val: "1 место без навеса" },
-          { name: "Транспорт", val: "Асфальтированная дорога" },
-          { name: "Залог", val: "1 000 ₽" },
-          { name: "Расстояние до центра", val: "5 км (15 мин на лодке)" }
+          { name: "Транспорт и подъезд", val: "230 км по А121 / Ласточка до Яккима, парковка + катер" },
+          { name: "Трансфер", val: "Катер по воде (10 мин), 1 рейс туда-обратно включен" },
+          { name: "Залог", val: "1 000 ₽" }
         ],
         rules: [
           "<strong>Заезд с 14:00 • Выезд до 12:00</strong>",
-          "Количество гостей: <strong>до 4-5 человек</strong>",
+          "Цена указана <strong>за 5 человек</strong>. Если больше — доплата <strong>1 500 ₽ / сутки за человека</strong>",
+          "Отмена брони за 2 недели — <strong>100% возврат предоплаты</strong>",
           "Можно с детьми: <strong>да</strong>",
           "С животными: <strong>по договорённости</strong>",
-          "Курение и вечеринки: <strong>запрещены</strong>",
-          "Отчётные документы: <strong>предоставляются</strong>",
+          "Курение и шумные вечеринки: <strong>запрещены</strong>",
           "Дом сдаётся <strong>от двух суток</strong>"
         ],
-        story: `Для вас уютный домик и отдельная баня в рустикальном стиле на острове Ладожского озера. Уединенное место. Природа, шхеры, тишина, рыбалка, ягоды. 15 минут от города Лахденпохья по воде.
+        story: `Для вас уютный дом и аутентичная отдельная баня в рустикальном стиле на первой линии Ладожского озера (остров Кюльвянсаари). Шхеры, тишина, чистый воздух, рыбалка и северная природа.
 
-Вместимость дома до 5 человек. Доставка (1 рейс) на лодке туда и обратно входит в стоимость.
+Для комфортного отдыха: отдельная беседка с мангальной зоной, качели, 2 уютных гамака, площадка для волейбола, самовар на дровах. Оборудован удобный плавучий пирс с лестницей для купания. В прокате есть лодки и сапборды.
 
-Есть удобный плавучий пирс, оборудован лестницей для купания. Зона барбекю: беседка, мангал, самовар на дровах. По необходимости сдаем лодку в прокат, прокат сапов.
+В доме: газовая плита, свет, чистая вода, посуда, постельное белье и средства гигиены. Питание от солнечных батарей 12 вольт, быстрая зарядка гаджетов через USB. Связь и мобильный интернет отличные.
 
-Постельное белье предоставляется. Есть газовая плита, свет, вода. В доме имеется вся необходимая посуда. Парковка под присмотром по договорённости. Электричество от солнечных батарей 12 вольт, зарядка телефона — USB. Интернет и связь отличная.
+Гости приезжают на платную охраняемую парковку на берегу, где авто остаётся под присмотром, далее трансфер на катере по воде (10 минут до острова). 1 рейс туда и обратно входит в стоимость!
 
-С животными по договорённости. Дом сдаётся от двух суток! Предоставляется катание на катере с капитаном по Ладожским шхерам, поездка на Валаам, заброска с палатками на острова.`
+С животными — по договорённости. Дом сдаётся от двух суток. Предоставляются водные прогулки по Ладожским шхерам, поездка на Валаам, заброска с палатками.`
       }
     };
 
@@ -1818,7 +1798,7 @@
         </div>
       `).join('');
 
-      // Слайдер
+      // Слайдер (только новые фото)
       const track = document.getElementById('carouselTrack');
       track.innerHTML = item.photos.map(p => `
         <div class="carousel-slide-item" onclick="triggerLightbox()">
@@ -1826,7 +1806,7 @@
         </div>
       `).join('');
 
-      // Превью
+      // Превью снизу
       const thumbStrip = document.getElementById('thumbStrip');
       thumbStrip.innerHTML = item.photos.map((p, i) => `
         <div class="thumb-node ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})">
@@ -1863,9 +1843,9 @@
     }
 
     function setupMessengerLinks(houseTitle) {
-      let msg = "Здравствуйте! Подскажите, пожалуйста, какие даты свободны для отдыха и какая актуальная стоимость?";
+      let msg = "Здравствуйте! Подскажите, пожалуйста, какие даты свободны для отдыха на Ладоге и какая актуальная стоимость?";
       if (houseTitle) {
-        msg = `Здравствуйте! Интересует домик ${houseTitle}. Подскажите, пожалуйста, какие даты свободны и какая актуальная стоимость?`;
+        msg = `Здравствуйте! Интересует домик ${houseTitle}. Подскажите, пожалуйста, какие даты свободны и какая стоимость?`;
       }
       const encodedMsg = encodeURIComponent(msg);
 
